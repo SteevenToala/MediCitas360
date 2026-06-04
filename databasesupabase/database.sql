@@ -83,8 +83,6 @@ CREATE TABLE facturas (
 
     clave_acceso VARCHAR(100) UNIQUE,
 
-    xml_generado TEXT,
-
     fecha_generacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -175,8 +173,7 @@ INSERT INTO facturas
     paciente,
     total,
     estado,
-    clave_acceso,
-    xml_generado
+    clave_acceso
 )
 VALUES
 (
@@ -184,18 +181,7 @@ VALUES
     'Juan Perez',
     25.00,
     'GENERADA',
-    'FAC-CITA-2026-0001',
-    '<FacturaCita>
-        <Paciente>Juan Perez</Paciente>
-        <Cedula>1800000001</Cedula>
-        <Medico>Dra. Ana Lopez</Medico>
-        <Especialidad>Medicina General</Especialidad>
-        <Fecha>2026-06-04</Fecha>
-        <Hora>08:00</Hora>
-        <Total>25.00</Total>
-        <Estado>GENERADA</Estado>
-        <ClaveAcceso>FAC-CITA-2026-0001</ClaveAcceso>
-     </FacturaCita>'
+    'FAC-CITA-2026-0001'
 );
 
 -- ==========================================

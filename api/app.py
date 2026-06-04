@@ -287,10 +287,10 @@ def create_cita():
                 if clave_acceso:
                     try:
                         cur.execute("""
-                            INSERT INTO facturas (cita_id, paciente, total, estado, clave_acceso, xml_generado)
-                            VALUES (%s, %s, %s, 'GENERADA', %s, %s)
+                            INSERT INTO facturas (cita_id, paciente, total, estado, clave_acceso)
+                            VALUES (%s, %s, %s, 'GENERADA', %s)
                             RETURNING id;
-                        """, (cita_id, paciente, costo_consulta, clave_acceso, xml_generado))
+                        """, (cita_id, paciente, costo_consulta, clave_acceso))
                         factura_id = cur.fetchone()["id"]
                         conn.commit()
 
@@ -301,8 +301,7 @@ def create_cita():
                             "paciente": paciente,
                             "total": costo_consulta,
                             "estado": "GENERADA",
-                            "clave_acceso": clave_acceso,
-                            "xml_generado": xml_generado
+                            "clave_acceso": clave_acceso
                         }
                         insert_factura_local(local_factura)
                     except Exception as ex_ins_bill:
@@ -448,8 +447,7 @@ def sincronizar_citas():
                         "paciente": f["paciente"],
                         "total": float(f["total"]),
                         "estado": f["estado"],
-                        "clave_acceso": f["clave_acceso"],
-                        "xml_generado": f["xml_generado"]
+                        "clave_acceso": f["clave_acceso"]
                     }
                     insert_factura_local(f_dict)
                     facturas_sincronizadas += 1

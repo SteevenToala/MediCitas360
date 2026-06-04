@@ -43,7 +43,6 @@ def init_local_db():
             total REAL NOT NULL,
             estado TEXT DEFAULT 'GENERADA',
             clave_acceso TEXT UNIQUE,
-            xml_generado TEXT,
             fecha_generacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (cita_id) REFERENCES citas (id)
         );
@@ -89,16 +88,15 @@ def insert_factura_local(factura_data):
     cursor = conn.cursor()
     try:
         cursor.execute("""
-            INSERT OR REPLACE INTO facturas (id, cita_id, paciente, total, estado, clave_acceso, xml_generado)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT OR REPLACE INTO facturas (id, cita_id, paciente, total, estado, clave_acceso)
+            VALUES (?, ?, ?, ?, ?, ?)
         """, (
             factura_data.get("id"),
             factura_data.get("cita_id"),
             factura_data.get("paciente"),
             float(factura_data.get("total")),
             factura_data.get("estado", "GENERADA"),
-            factura_data.get("clave_acceso"),
-            factura_data.get("xml_generado")
+            factura_data.get("clave_acceso")
         ))
         conn.commit()
         print(f"Factura {factura_data.get('clave_acceso')} guardada en la replica SQLite local.")
