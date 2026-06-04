@@ -84,7 +84,12 @@ Para aislar las librerías de Python y evitar conflictos de importación de `psy
    ```powershell
    # Desde la raíz del proyecto Medicitas360
    python -m venv venv
+   
+   # Si usas PowerShell:
    .\venv\Scripts\Activate.ps1
+   
+   # Si usas CMD (Símbolo del sistema):
+   venv\Scripts\activate.bat
    ```
 2. **Instalar dependencias del proyecto:**
    ```powershell
