@@ -1,0 +1,48 @@
+# ==========================================
+# MEDICITAS 360 - GLOBAL GITIGNORE
+# ==========================================
+
+# Environment variables
+.env
+**/.env
+
+# Local Databases (SQLite Replica)
+*.db
+api/local_citas.db
+
+# Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+venv/
+.venv/
+env/
+
+# Flutter & Dart (mobile_app)
+mobile_app/.dart_tool/
+mobile_app/build/
+mobile_app/.flutter-plugins
+mobile_app/.flutter-plugins-dependencies
+mobile_app/.metadata
+mobile_app/flutter_client.iml
+mobile_app/.idea/
+mobile_app/android/.gradle/
+mobile_app/android/local.properties
+
+# IDEs & System files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+Thumbs.db
+.DS_Store
+
+# Archives
+*.zip
+*.rar
+Medicitas360.zip

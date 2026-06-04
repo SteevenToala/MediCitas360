@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<FacturaCita>
+  <Paciente>Alexander Tasinchano</Paciente>
+  <Cedula>1804901234</Cedula>
+  <Medico>Dra. Ana Lopez</Medico>
+  <Especialidad>Medicina General</Especialidad>
+  <Fecha>2026-06-04</Fecha>
+  <Hora>08:30</Hora>
+  <Total>25.00</Total>
+  <Estado>GENERADA</Estado>
+  <ClaveAcceso>FAC-CITA-2026-0002</ClaveAcceso>
+</FacturaCita>
