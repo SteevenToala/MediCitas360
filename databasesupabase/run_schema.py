@@ -2,8 +2,9 @@ import os
 import psycopg
 from dotenv import load_dotenv
 
-# Load database credentials from .env file
-load_dotenv()
+# Load database credentials from .env file relative to this script
+env_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path=env_path)
 
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT", "5432")
@@ -22,7 +23,8 @@ def run_sql_file():
         with psycopg.connect(conn_str) as conn:
             with conn.cursor() as cur:
                 print("Leyendo database.sql...")
-                with open("database.sql", "r", encoding="utf-8") as f:
+                sql_path = os.path.join(os.path.dirname(__file__), "database.sql")
+                with open(sql_path, "r", encoding="utf-8") as f:
                     sql = f.read()
                 
                 print("Ejecutando script SQL...")
