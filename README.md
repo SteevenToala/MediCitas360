@@ -90,6 +90,14 @@ Para aislar las librerías de Python y evitar conflictos de importación de `psy
    ```powershell
    pip install -r api/requirements.txt
    ```
+3. **Configurar e Inicializar la Base de Datos (Supabase):**
+   Las credenciales de acceso se cargan desde el archivo `.env` dentro de la carpeta `databasesupabase/`.
+   Para recrear las tablas y sembrar los datos iniciales de médicos y horarios en la nube, ejecute:
+   ```powershell
+   cd databasesupabase
+   ..\venv\Scripts\python run_schema.py
+   cd ..
+   ```
 
 ---
 
