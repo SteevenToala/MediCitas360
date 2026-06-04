@@ -47,7 +47,7 @@ class ApiService {
     required int medicoId,
     required String fecha,
     required String hora,
-    String? customToken, # Option to simulate incorrect/empty token from UI
+    String? customToken, // Option to simulate incorrect/empty token from UI
   }) async {
     final url = Uri.parse("$apiBaseUrl/api/citas");
     

@@ -298,7 +298,7 @@ class _CitasListScreenState extends State<CitasListScreen> {
                                         hora: c.hora,
                                         total: c.valorPagar,
                                         codigoPago: c.codigoPago,
-                                        claveAcceso: "FAC-CITA-2026-${c.id:04d}", // Reconstruct
+                                        claveAcceso: "FAC-CITA-2026-${c.id.toString().padLeft(4, '0')}", // Reconstruct
                                         qrBase64: "", // Empty will make the screen generate it or show fallback
                                       ),
                                     ),
