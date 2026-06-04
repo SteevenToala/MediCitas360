@@ -160,6 +160,11 @@ VALUES
     'PAGO-CITA-2026-0001'
 );
 
+-- Actualizar disponibilidad del horario de la cita de prueba
+UPDATE horarios
+SET disponible = FALSE
+WHERE medico_id = 1 AND fecha = '2026-06-04' AND hora = '08:00';
+
 -- ==========================================
 -- INSERT FACTURA DE PRUEBA
 -- ==========================================
