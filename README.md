@@ -136,13 +136,25 @@ $env:PORT="5002"
 
 ---
 
-### Paso 4: Configurar e Iniciar el Balanceador NGINX (Puerto 8080)
-1. Copie el archivo `nginx/nginx.conf` a la carpeta de configuración de su instalación de NGINX (por ejemplo, `/etc/nginx/` o `C:\nginx\conf\`).
-2. Inicie o recargue NGINX:
-   ```bash
-   nginx -s reload
+### Paso 4: Iniciar NGINX y Squid Proxy con Docker Compose (Puertos 8080 y 3128)
+Para simplificar la ejecución y portabilidad, se incluye un archivo `docker-compose.yml` que levanta tanto el balanceador de carga **NGINX** como el proxy de restricción de navegación **Squid**.
+
+1. **Requisitos:** Asegúrate de tener instalado y ejecutándose **Docker** (o Docker Desktop en Windows).
+2. **Levantar los servicios:** Ejecuta el siguiente comando desde la raíz del proyecto `Medicitas360`:
+   ```powershell
+   docker compose up -d
    ```
-3. Ahora las peticiones realizadas a `http://localhost:8080` se distribuirán automáticamente entre el puerto 5001 y 5002.
+3. **Servicios creados:**
+   *   **NGINX (Puerto 8080):** Redirige y balancea las peticiones Round-Robin entre las APIs en los puertos `5001` y `5002` (a través de `host.docker.internal`).
+   *   **Squid Proxy (Puerto 3128):** Aplica la regla de permitir únicamente la navegación al dominio `uta.edu.ec` y bloquear el resto (`google.com`, `facebook.com`, etc.).
+4. **Verificar estado:**
+   ```powershell
+   docker compose ps
+   ```
+5. **Detener servicios:**
+   ```powershell
+   docker compose down
+   ```
 
 ---
 
@@ -160,16 +172,6 @@ $env:PORT="5002"
    flutter run
    ```
    *Nota: Por defecto, el aplicativo apunta a `http://localhost:8080`. Puede cambiar esta configuración dinámicamente desde el menú de Configuración (Icono de engranaje) en la esquina superior derecha de la aplicación móvil (ej. cambiar a `http://10.0.2.2:8080` si usa el emulador de Android).*
-
----
-
-### Paso 6: Configurar Squid Proxy (Puerto 3128)
-Para aplicar las restricciones de navegación y permitir únicamente `uta.edu.ec`:
-1. Copie el archivo `squid/squid.conf` en la ruta de configuración de Squid (por ejemplo `/etc/squid/squid.conf`).
-2. Reinicie el servicio de Squid:
-   ```bash
-   sudo systemctl restart squid
-   ```
 
 ---
 
