@@ -77,46 +77,49 @@ flowchart TD
 
 ---
 
-### Paso 1: Configurar la Base de Datos Principal (Supabase)
-Las tablas y datos iniciales de prueba ya se han creado y poblado en la base de datos de Supabase. Si desea recrearlas, puede ejecutar el script en `databasesupabase/`:
-```bash
-cd databasesupabase
-python run_schema.py
-```
+### Paso 1: Configurar el Entorno Virtual Local y Dependencias
+Para aislar las librerías de Python y evitar conflictos de importación de `psycopg` (error *no pq wrapper available*), se ha configurado un entorno virtual en la raíz de `Medicitas360`:
+
+1. **Crear y activar el entorno virtual:**
+   ```powershell
+   # Desde la raíz del proyecto Medicitas360
+   python -m venv venv
+   .\venv\Scripts\Activate.ps1
+   ```
+2. **Instalar dependencias del proyecto:**
+   ```powershell
+   pip install -r api/requirements.txt
+   ```
 
 ---
 
-### Paso 2: Iniciar el Servicio de Facturación SOA (Puerto 5003)
-1. Instale las dependencias de la API si no lo ha hecho:
-   ```bash
-   pip install flask
-   ```
-2. Inicie el servidor de facturación:
-   ```bash
-   cd facturacion
-   python app.py
-   ```
-   *El servicio iniciará en `http://localhost:5003`.*
+### Paso 2: Iniciar el Servicio de Facturación XML SOA (Puerto 5003)
+Inicie el servidor de facturación utilizando el intérprete de Python de nuestro entorno virtual local:
+```powershell
+cd facturacion
+..\venv\Scripts\python app.py
+```
+*El servicio iniciará en `http://localhost:5003`.*
 
 ---
 
 ### Paso 3: Iniciar las Dos Instancias de la API REST (Puertos 5001 y 5002)
-Abra dos terminales separadas para ejecutar las dos instancias del mismo código base:
+Abra dos terminales de PowerShell separadas y ejecute las dos instancias de la API mediante el Python del entorno virtual:
 
 **Instancia 1 (Puerto 5001):**
-```bash
+```powershell
 cd api
 $env:PORT="5001"
-python app.py
+..\venv\Scripts\python app.py
 ```
 
 **Instancia 2 (Puerto 5002):**
-```bash
+```powershell
 cd api
 $env:PORT="5002"
-python app.py
+..\venv\Scripts\python app.py
 ```
-*Ambas instancias utilizarán y sincronizarán la base de datos central en Supabase y escribirán de forma local en la réplica SQLite `local_citas.db` de su respectivo entorno.*
+*Ambas instancias utilizarán la base de datos remota en Supabase y escribirán de forma local en la réplica compartida SQLite `local_citas.db`.*
 
 ---
 
